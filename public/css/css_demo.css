@@ -1,0 +1,13 @@
+        .blueyellow{
+            color: blue;
+            background-color: yellow;
+        }
+
+        h2 {
+            color: rgb(0,255,255);
+            background-color: #00AAAA;
+        }
+        #two {
+            /* color: red; */
+            background-color: pink;
+        }

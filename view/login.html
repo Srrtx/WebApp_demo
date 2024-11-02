@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+
+</head>     
+
+<body>
+    <div class="container">
+        <form id="loginForm">
+            <div class="container d-flex justify-content-center mt-5 ">
+                <div class="form border container px-3 col-lg-8 shadow rounded-3 mt-5">
+                    <div class="row" id="formLogin">
+                        <div class="col-lg-7">
+                            <div class="container row  m-2 ">
+                                <h1 class="text-center pt-5">Login</h1>
+                                <div class="py-1">Username</div>
+                                <input type="text" name="username" class="form-control shadow "
+                                    placeholder="Username..." required>
+                                <div class="py-1">Password</div>
+                                <input type="password" name="password" class="form-control shadow"
+                                    placeholder="Password..." required>
+                                <div class="py-3">
+                                    <input type="checkbox" id="cbRemember" class="form-check-input shadow">
+                                    <label for="cbremember">Remember me</label>
+                                </div>
+                                <button type="submit" class="btn btn-dark  shadow">Login</button>
+                                <div class="text-center pt-3">
+                                    You don't have an account? <a href="Register.html" class="text-dark">Create new account</a>
+                                </div>
+                        
+                            </div>
+                        </div>
+                        <div class="col-lg-5 d-flex align-items-center justify-content-center ps-5 pe-0 m-0">
+                            <img src="/public/img/Login2.jpg" alt="Login1" width="500px" height="450px"
+                                class="rounded-3 me-0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Handling form submission
+        const formLogin = document.querySelector('#loginForm');
+        formLogin.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const username = formLogin['username'].value;
+            const password = formLogin['password'].value;
+
+            try {
+                const options = {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, password })
+                };
+                const response = await fetch('/login', options);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.redirect) {
+                        window.location.href = data.redirect; // Redirects user to the specified page after successful login
+                    }
+                } else {
+                    const errorText = await response.text();
+                    throw new Error(errorText); // Shows an error if the login is not successful
+                }
+            } catch (err) {
+                console.error('Error:', err.message);
+                alert('Login failed: ' + err.message); // Alerts the user about the failure
+            }
+        });
+    </script>
+</body>
+</body>
+
+</html>

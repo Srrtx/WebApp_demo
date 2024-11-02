@@ -1,0 +1,44 @@
+#row{
+    display: flex;
+    flex-direction: row;
+}
+body{
+    margin: 0;
+}
+nav{
+    background-color: black;
+    padding: 4px 10px;
+    flex:2
+}
+nav a{
+    color: white;
+    text-decoration: none;
+    margin-right: 8px;
+    display: block;
+}
+nav a:hover{
+    color: yellow;
+}
+#content{
+    padding: 0px 16px;
+    background-color: white;
+    flex:8
+}
+#content h1{
+    margin-top:0;
+}
+footer{
+    margin: 0;
+    background-color: lightgray;
+    text-align: center;
+    padding: 4px 0px;
+}
+#last{
+    margin-bottom: 0px;
+}
+@media(max-width: 460px){
+    #row{
+        display: flex;
+        flex-direction: column;
+    }
+}

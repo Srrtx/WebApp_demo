@@ -1,0 +1,36 @@
+#box{
+    display: flex;
+    flex-direction: row;
+}
+.left{
+        background-color: darkblue;
+        color: white;
+        border: 2px solid black;
+        border-radius: 10px 0px 0px 10px;
+        margin: 0;
+        padding: 10px 60px 30px 20px;
+        flex: 4;
+}
+.right{
+        border: 2px solid darkblue;
+        flex: 6;
+        padding: 10px;
+        padding: 10px 100px 30px 20px;
+}
+.button1 {
+    color: white;
+    background-color: green;
+    border: none ;
+    border-radius: 8px;
+    padding: 8px;
+}
+.button2 {
+    color: white;
+    background-color: red;
+    border: none ;
+    border-radius: 8px;
+    padding: 8px;
+}
+.newline{
+    margin-bottom: 8px;
+}

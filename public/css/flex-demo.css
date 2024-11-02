@@ -1,0 +1,42 @@
+.flexrow{
+    display:flex;
+    flex-direction: row;
+}
+#box1 {
+    background-color:yellow;
+}
+#box2{
+    background-color: lightgreen;
+    flex-direction: row;
+    justify-content: center;
+}
+#box3{
+    background-color: lightcyan;
+    justify-content: space-between
+}
+.flexcolumn{
+    display: flex;
+    flex-direction:column;
+}
+#box4{
+    background-color: lightpink;
+}
+#box5{
+    background-color: purple;
+    align-items: center;
+}
+.boxlayout{
+    width: 50px;
+    height: 50px;
+}
+#boxleft{
+    background-color: black;
+    flex: 1;
+}
+#boxright{
+    background-color:lightgray;
+    flex: 3;
+}
+#boxrow{
+    background-color: lightyellow;   
+}

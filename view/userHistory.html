@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User History</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="ps-2 navbar bg-success " style="background-image: url('/public/img/homepage3.jpg');">
+        <div>
+            <a href="/HomepageUser.html" class="text-white navbar ps-5 fw-bold">HOMEPAGE</a>
+        </div>
+        <div class="">
+            <a href="/userHistory.html" class="text-white px-4" style="text-decoration: none">History</a>
+            <!-- <a href="#" class="text-white px-4" style="text-decoration: none" onclick="openRequestStatus()">Request</a> -->
+            <button id="usernameDisplay" class="btn shadow form text-white">Loading...</button>
+            <script src="/public/client.js"></script>
+            <img src="/public/img/login.jpg" alt="Logo" width="60px" height="60px" class="rounded-circle shadow ">
+            <button class="btn shadow form text-white" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+
+        </div>
+    </div>
+    <div class="border-bottom"></div>
+
+    <div class="bg-dark rounded-5 shadow  mx-5 " style="background-image: url('/public/img/backgrond2.jpg');">
+        <h4 class="p-4 mt-3 text-white  text-center mb-5  fw-bold" id="day">
+            </h5>
+    </div>
+    </div>
+    <div class="container">
+        <h2>User Booking History</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Room Name</th>
+                    <th>Date</th>
+                    <th>Time Slot</th>
+                    <th>Status</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+            <tbody id="bookingTable">
+                <!-- Rows will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="bg-dark mt-3 pt-5 pb-3" style="background-image: url('/public/img/homepage3.jpg');"></footer>
+
+    <script>
+        fetch('/api/protected-data')
+            .then(response => {
+                if (!response.ok && response.status === 401) {
+                    window.location.href = '/login'; // Redirect to login
+                }
+                return response.json();
+            })
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+
+
+        var dayElement = document.getElementById('day');
+        var currentDate = new Date();
+        dayElement.textContent = `${currentDate.getDate()} / ${currentDate.getMonth() + 1} / ${currentDate.getFullYear()}`;
+
+        var dayElement = document.getElementById('day');
+        var currentDate = new Date();
+        var day = currentDate.getDate();
+        var month = currentDate.getMonth() + 1;
+        var year = currentDate.getFullYear();
+        dayElement.textContent = day + ' / ' + month + ' / ' + year;
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/api/user-bookings')
+                .then(response => response.json())
+                .then(bookings => {
+                    updateBookingTable(bookings);
+                })
+                .catch(error => console.error('Error fetching booking data:', error));
+        });
+
+        function updateBookingTable(bookings) {
+            const tableBody = document.getElementById('bookingTable');
+            bookings.forEach(booking => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${booking.room_name}</td>
+                    <td>${new Date(booking.date).toLocaleDateString()}</td>
+                    <td>${booking.time_slot}</td>
+                    <td>${booking.status}</td>
+                    <td>${booking.reason || 'N/A'}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+                        // Logout Function
+                        function logout() {
+            fetch('/logout')
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/'; // Redirect to the login page
+                    } else {
+                        throw new Error('Failed to logout');
+                    }
+                })
+                .catch(error => {
+                    console.error('Logout error:', error);
+                    alert('Error logging out');
+                });
+        }
+    </script>
+</body>
+
+</html>

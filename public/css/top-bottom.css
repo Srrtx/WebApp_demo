@@ -1,0 +1,31 @@
+body{
+    margin: 0;
+}
+nav{
+    background-color: black;
+    padding: 4px 10px;
+}
+nav a{
+    color: white;
+    text-decoration: none;
+    margin-right: 8px;
+}
+nav a:hover{
+    color: yellow;
+}
+#content{
+    padding: 0px 8px;
+    background-color: white;
+}
+#content h1{
+    margin-top:0;
+}
+footer{
+    margin: 0;
+    background-color: lightgray;
+    text-align: center;
+    padding: 4px 0px;
+}
+#last{
+    margin-bottom: 0px;
+}

@@ -1,0 +1,13 @@
+header{
+    background-image: url(/public/img/bg-masthead.jpg);
+    background-position: center;
+    padding: 6rem 0;
+}
+#showcase1{
+    background-image: url(/public/img/bg-showcase-1.jpg);
+    min-height: 30rem;
+}
+#showcase2{
+    background-image: url(/public/img/bg-showcase-2.jpg);
+    min-height: 30rem;
+}
